@@ -28,7 +28,7 @@ export class Login extends Component {
             onChange={this.handleInputChange}
             value={this.state.username}
             label="Username"
-            icon="fas fa-sign-in-alt"
+            icon="far fa-user"
             name="username"
             placeholder="Username"
             type="text"
