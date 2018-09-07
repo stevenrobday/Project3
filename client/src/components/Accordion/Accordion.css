@@ -1,0 +1,32 @@
+.accordion {
+  cursor: pointer;
+  width: 100%;
+  border-radius: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.panel {
+  padding: 0 20px;
+  overflow: hidden;
+}
+
+i.active{
+  transform: rotate(90deg);
+  transition: transform 0.2s ease-in;
+}
+
+i.inactive{
+  transform: rotate(0deg);
+  transition: transform 0.2s ease-in;
+}
+
+.panel.inactive {
+  max-height: 0; 
+  transition: max-height 0.2s cubic-bezier(0,1,0,1);
+}
+
+.panel.active {
+  max-height: 100vw;
+  transition: max-height 0.2s cubic-bezier(1,0,1,0);
+}
