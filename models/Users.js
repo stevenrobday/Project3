@@ -1,8 +1,7 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-var Schema = mongoose.Schema;
-
-var UsersSchema = new Schema ({
+const UsersSchema = new Schema ({
     // user first name
     first: {
         type: String,
@@ -39,7 +38,7 @@ var UsersSchema = new Schema ({
 UsersSchema.index({email: 1}, {unique: true});
 
 // model for Users collection
-var Users = mongoose.model("Users", UsersSchema);
+const Users = mongoose.model("Users", UsersSchema);
 
 module.exports = Users;
 

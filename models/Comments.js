@@ -1,8 +1,8 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var CommentsSchema = new Schema ({
+const CommentsSchema = new Schema ({
     // user's name
     name: {
         type: String,
@@ -15,6 +15,6 @@ var CommentsSchema = new Schema ({
     },
 });
 
-var Comments = mongoose.model("Comments", CommentsSchema);
+const Comments = mongoose.model("Comments", CommentsSchema);
 
 module.exports = Comments;
