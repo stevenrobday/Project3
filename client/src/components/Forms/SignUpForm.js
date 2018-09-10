@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Box, Section } from "../Layout";
+import { Columns, Column, Box, Section } from "../Layout";
 import { FormBtn, Input } from "../FormComponents";
 
 export class SignUpForm extends Component {
@@ -25,8 +25,8 @@ export class SignUpForm extends Component {
   render() {
     return (
       <Section>
-        <div className="columns">
-          <div className="column is-4 is-offset-4">
+        <Columns>
+          <Column size="is-4" offset="is-offset-4">
             <Box>
               <h1 className="title">Sign Up!</h1>
               <form>
@@ -35,7 +35,7 @@ export class SignUpForm extends Component {
                     onChange={this.handleInputChange}
                     value={this.state.name}
                     label="Name"
-                    icon="fas fa-user-plus"
+                    icon="fas fa-user"
                     name="name"
                     placeholder="Full Name"
                     type="text"
@@ -46,7 +46,7 @@ export class SignUpForm extends Component {
                     onChange={this.handleInputChange}
                     value={this.state.username}
                     label="Username"
-                    icon="fas fa-user-plus"
+                    icon="far fa-user"
                     name="username"
                     placeholder="Username"
                     type="text"
@@ -68,8 +68,8 @@ export class SignUpForm extends Component {
                 </FormBtn>
               </form>
             </Box>
-          </div>
-        </div>
+          </Column>
+        </Columns>
       </Section>
     );
   }

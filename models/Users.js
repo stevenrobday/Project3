@@ -1,8 +1,9 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+bcrypt = require('bcrypt');
+SALT_WORK_FACTOR = 10;
 
-var Schema = mongoose.Schema;
-
-var UsersSchema = new Schema ({
+const UsersSchema = new Schema ({
     // user first name
     first: {
         type: String,
@@ -35,11 +36,34 @@ var UsersSchema = new Schema ({
       }]
 });
 
+UsersSchema.pre('save', function(next){
+    var Users = this;
+
+    if (!Users.isModified('password')) return next();
+
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next (err);
+
+    bcrypt.hash(Users.password, salt, function(err, hash){
+
+        Users.password = hash;
+        next();
+    });
+    });
+})
+
+UsersSchema.methods.comparePassword = function(candidatePassword, cb) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch){
+        if (err) return cb (err);
+        cb(null, isMatch);
+    });
+}
+
 // no duplicate users
 UsersSchema.index({email: 1}, {unique: true});
 
 // model for Users collection
-var Users = mongoose.model("Users", UsersSchema);
+const Users = mongoose.model("Users", UsersSchema);
 
 module.exports = Users;
 
