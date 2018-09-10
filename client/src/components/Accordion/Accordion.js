@@ -15,15 +15,15 @@ class Accordion extends Component {
   render() {
     return (
       <div>
-        <button 
-          className="button accordion is-info" 
+        <button
+          className="button accordion is-info"
           onClick={this.handleClick}
         >
           <div>
-            {this.props.headline}
+            {this.props.title}
           </div>
           <div>
-            <i 
+            <i
               className={`fas fa-chevron-right 
               ${this.state.active ? "active" : "inactive"} 
               `}></i>
@@ -33,9 +33,9 @@ class Accordion extends Component {
           className={`panel 
           ${this.state.active ? "active" : "inactive"} 
           `}>
-          <p><strong>Date: </strong>{this.props.date}</p>
-          <p>{this.props.snippet}</p>
-          <p><a href={this.props.link} target="_blank">Click here for NYT article</a></p>
+          <div className="accContent">
+            {this.props.children}
+          </div>
         </div>
       </div>
     )
