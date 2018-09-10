@@ -1,19 +1,35 @@
 import axios from "axios";
 require('dotenv').config();
 
-const BASEURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-const APIKEY = process.env.REACT_IGDB_KEY;
+// let BASEURL = "https://api-endpoint.igdb.com/games/";
+
+// const APIKEY = process.env.REACT_APP_IGDB_KEY;
+
+const BASEURL = "https://www.giantbomb.com/api/";
+
+const APIKEY = process.env.REACT_APP_GIANTBOMB_KEY;
 
 export default {
-  getArticles: function(topic, begin, end) {
+  // searchGames: function (game) {
+  //   BASEURL += `?search=${game}&fields=*`;
+  //   return axios.get(
+  //     BASEURL,
+  //     {
+  //       headers: {
+  //         "user-key": APIKEY,
+  //         Accept: "application/json"
+  //       }
+  //     });
+  // }
+  searchGames: function (game) {
+    let URL = BASEURL + `search/?api_key=${APIKEY}&format=json&query="${game}"&resources=game`;
     return axios.get(
-      BASEURL, 
-      { params: {
-          'api-key': APIKEY,
-          q: topic,
-          begin_date: `${begin}0101`,
-          end_date: `${end}1231`
-        } 
-      });
+      URL);
+  },
+
+  getGame: function(url) {
+    let URL = url + `?api_key=${APIKEY}&format=json`;
+    return axios.get(
+      URL);
   }
 };

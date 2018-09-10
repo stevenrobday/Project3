@@ -6,8 +6,8 @@ export const SearchGames = props => (
     <div className="field is-grouped">
       <div className="control">
         <Input
-          // onChange={props.onChange}
-          //     value={props.topicValue}
+          onChange={props.onChange}
+          value={props.value}
           label={null}
           icon="fas fa-gamepad"
           name="game"
@@ -15,7 +15,7 @@ export const SearchGames = props => (
           placeholder="Search games here"
         />
       </div>
-      <FormBtn color="is-success">
+      <FormBtn color="is-success" onClick={props.onClick}>
         SEARCH
       </FormBtn>
     </div>

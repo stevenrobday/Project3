@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchGames, Login } from "../Forms";
 
-export const Navbar = () => (
+export const Navbar = props => (
   <nav className="navbar is-info" aria-label="main navigation">
     <div className="navbar-brand">
       <div className="navbar-item has-text-white is-size-3">
@@ -12,7 +12,11 @@ export const Navbar = () => (
     </div>
     <div className="navbar-start">
       <div className="navbar-item">
-        <SearchGames />
+        <SearchGames 
+          onChange={props.onChange}
+          value={props.value}
+          onClick={props.onClick}
+        />
       </div>
     </div>
     <div className="navbar-menu">
