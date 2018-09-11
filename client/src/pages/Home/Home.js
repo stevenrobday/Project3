@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navbar } from "../../components/Layout";
 import { GameResults } from "../../components/Results";
+// import { AboutCard } from "../../components/Layout";
 import API from "../../utils/API";
 
 class Home extends Component {
