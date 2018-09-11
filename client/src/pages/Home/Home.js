@@ -32,7 +32,7 @@ class Home extends Component {
           obj.coverImage = game.data.results.image.medium_url;
           obj.description = game.data.results.deck;
           obj.wiki = game.data.results.site_detail_url;
-          obj.release = game.data.results.original_release_date.split(" ")[0];
+          obj.release = (game.data.results.original_release_date) ? game.data.results.original_release_date.split(" ")[0] : "N/A";
 
           obj.platforms = game.data.results.platforms.map(platform => {
             let obj2 = {};
