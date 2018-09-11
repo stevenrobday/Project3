@@ -11,7 +11,7 @@ export const AboutCard = props => (
                         </div>
                     </div>
                     <figure className="image is-4by3">
-                        <img src="../../../public/GSLogo.PNG" alt="GameSplice Logo"/>
+                        <img src={require('./img/GSLogo.PNG')} alt="GameSplice Logo"/>
                     </figure>
                 </div>
                 <div className="card-content">
