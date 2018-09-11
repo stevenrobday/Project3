@@ -37,16 +37,16 @@ const UsersSchema = new Schema ({
 });
 
 UsersSchema.pre('save', function(next){
-    var Users = this;
+    var user = this;
 
-    if (!Users.isModified('password')) return next();
+    if (!user.isModified('password')) return next();
 
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next (err);
 
-    bcrypt.hash(Users.password, salt, function(err, hash){
+    bcrypt.hash(user.password, salt, function(err, hash){
 
-        Users.password = hash;
+        user.password = hash;
         next();
     });
     });
