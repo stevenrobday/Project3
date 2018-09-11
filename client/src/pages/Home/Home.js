@@ -77,8 +77,10 @@ class Home extends Component {
           value={this.state.game}
           onClick={this.handleFormSubmit}
         />
-        {this.state.games.length > 0 && (
+        {this.state.games.length > 0 ? (
           <GameResults results={this.state.games} />
+        ) : (
+          <AboutCard />
         )}
       </div>
     );
