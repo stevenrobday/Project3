@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import { Columns, Column, Box, Section } from "../Layout";
 import { FormBtn, Input } from "../FormComponents";
 import API from "../../utils/API";
+import { Redirect } from 'react-router'
 
 export class SignUpForm extends Component {
   state = {
     name: { input: "", valid: false, text: "Please enter a valid name" },
     username: { input: "", valid: false, text: "Please enter a valid username" },
-    password: { input: "", valid: false, text: "Passwords must be at least 6 characters long" }
+    password: { input: "", valid: false, text: "Passwords must be at least 6 characters long" },
+    redirect: false
   };
 
   // saveUser = () => {
@@ -91,7 +93,7 @@ export class SignUpForm extends Component {
             username: this.state.username.input,
             password: this.state.password.input
           })
-          .then(res => console.log(res))
+          .then(res => this.setState({ redirect: true }))
         }
       }) 
       .catch(err => console.log(err));
@@ -99,7 +101,9 @@ export class SignUpForm extends Component {
   }
 
   render() {
-    return (
+    return this.state.redirect ? (
+     <Redirect to="/home" />
+    ) : (
       <Section>
         <Columns>
           <Column size="is-4" offset="is-offset-4">
