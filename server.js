@@ -30,8 +30,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Define API routes here
-app.use(routes);
 app.use('/auth', require('./auth'));
+app.use(routes);
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

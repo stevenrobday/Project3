@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchGames, Login } from "../Forms";
+import { SearchGames } from "../Forms";
 
 export const Navbar = props => (
   <nav className="navbar is-info" aria-label="main navigation">
@@ -36,7 +36,7 @@ export const Navbar = props => (
           <div className="dropdown-menu" id="dropdown-menu4" role="menu">
             <div className="dropdown-content">
               <div className="dropdown-item">
-                <Login />
+                {props.children}
               </div>
             </div>
           </div>

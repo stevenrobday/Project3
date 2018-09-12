@@ -6,14 +6,15 @@ const strategy = new LocalStrategy(
 		usernameField: 'username' // not necessary, DEFAULT
 	},
 	function(username, password, done) {
-		User.findOne({ 'local.username': username }, (err, userMatch) => {
+		User.findOne({ 'username': username }, (err, userMatch) => {
 			if (err) {
 				return done(err);
 			}
 			if (!userMatch) {
+				console.log("a hew!");
 				return done(null, false, { message: 'Incorrect username' });
 			}
-			if (!userMatch.checkPassword(password)) {
+			if (!userMatch.validPassword(password)) {
 				return done(null, false, { message: 'Incorrect password' });
 			}
 			return done(null, userMatch);

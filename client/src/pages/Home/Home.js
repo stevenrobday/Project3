@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, AboutCard } from "../../components/Layout";
+import { AboutCard } from "../../components/Layout";
 import { GameResults } from "../../components/Results";
 import API from "../../utils/API";
 
@@ -72,11 +72,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          onChange={this.handleInputChange}
-          value={this.state.game}
-          onClick={this.handleFormSubmit}
-        />
         {this.state.games.length > 0 ? (
           <GameResults results={this.state.games} />
         ) : (
