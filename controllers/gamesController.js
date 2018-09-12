@@ -16,7 +16,10 @@ module.exports = {
   },
   create: function (req, res) {
     db.Games
-      .create(req.body)
+      .findOneAndUpdate(req.body, req.body, { new: true, upsert: true })
+      .then(dbModel => {
+        return db.Users.findOneAndUpdate({ username: req.params.username }, { $push: { wishlist: dbModel._id } });
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

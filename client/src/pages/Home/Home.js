@@ -83,7 +83,11 @@ class Home extends Component {
           user={this.props.user}
         />
         {this.state.games.length > 0 ? (
-          <GameResults results={this.state.games} />
+          <GameResults 
+            results={this.state.games} 
+            loggedIn={this.props.loggedIn}
+            user={this.props.user}
+          />
         ) : (
           <AboutCard />
         )}

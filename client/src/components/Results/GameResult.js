@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Columns, Column } from "../Layout";
+import { Wishlist } from "../Forms";
 import Accordion from "../Accordion";
 
 export class GameResult extends Component {
@@ -10,7 +11,7 @@ export class GameResult extends Component {
           <Column size="is-2" offset="">
             <img src={this.props.result.coverImage} alt={this.props.result.name} />
           </Column>
-          <Column size="is-7" offset="">
+          <Column size="is-8" offset="">
             <div className="is-size-5">
               <strong>
                 {this.props.result.name}
@@ -38,6 +39,14 @@ export class GameResult extends Component {
             <div>
               <a href={this.props.result.wiki} target="_blank">Visit wiki page!</a>
             </div>
+          </Column>
+          <Column size="is-2" offset="">
+            {this.props.loggedIn && (
+              <Wishlist 
+                user={this.props.user}
+                title={this.props.result.name}
+              />
+            )}
           </Column>
         </Columns>
         <Accordion title="Images">

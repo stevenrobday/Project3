@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 
 class App extends Component {
@@ -75,7 +76,21 @@ class App extends Component {
                 user={this.state.user}
               />} 
             />
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/home" render={() => <Home 
+                loggedIn={this.state.loggedIn}
+                login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
+              />} 
+            />
+            <Route exact path="/profile/:username" render={(props) => <Profile 
+                {...props}
+                loggedIn={this.state.loggedIn}
+                login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
+              />} 
+            />
             <Route exact path="/signup" component={SignUp} />
           </div>
         </Router>

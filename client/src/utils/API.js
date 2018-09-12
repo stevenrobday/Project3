@@ -39,5 +39,9 @@ export default {
 
   saveUser: function(userData) {
     return axios.post("/api/users/", userData);
+  },
+
+  wishlist: function(username, game) {
+    return axios.post("/api/games/" + username, game);
   }
 };
