@@ -1,12 +1,12 @@
 import React from "react";
-import { SearchGames, Login } from "../Forms";
+import { SearchGames } from "../Forms";
 
 export const Navbar = props => (
   <nav className="navbar is-info" aria-label="main navigation">
     <div className="navbar-brand">
       <div className="navbar-item has-text-white is-size-3">
         <a href="/" className="has-text-white">
-        <i className="far fa-newspaper"></i> GameThingy
+        <i className="fas fa-headset"></i> GameSplice
         </a>
         </div>
     </div>
@@ -36,7 +36,7 @@ export const Navbar = props => (
           <div className="dropdown-menu" id="dropdown-menu4" role="menu">
             <div className="dropdown-content">
               <div className="dropdown-item">
-                <Login />
+                {props.children}
               </div>
             </div>
           </div>
