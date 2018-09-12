@@ -11,6 +11,7 @@ Technology used in this app includes:
   <li>Passport</li>
 <br>
 To start the app, run the following steps:
+<br>
   <li>Clone the repo to your computer</li>
   <li>CD to the file</li>
   <li>Run "yarn install"</li>
