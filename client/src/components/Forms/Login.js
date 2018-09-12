@@ -17,6 +17,7 @@ export class Login extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    this.props.login(this.state.username, this.state.password);
     //pass this.state.username and password to passport (?)
   }
 
