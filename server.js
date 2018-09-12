@@ -29,10 +29,8 @@ app.get("*", (req, res) => {
 });
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gameguys");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gamesplice");
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
-
-
