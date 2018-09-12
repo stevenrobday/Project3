@@ -1,21 +1,21 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-bcrypt = require('bcrypt');
+bcrypt = require('bcryptjs');
 SALT_WORK_FACTOR = 10;
 
 const UsersSchema = new Schema ({
     // user first name
-    first: {
+    name: {
         type: String,
         required: true
     },
-    // user last name
-    last: {
-        type: String,
-        required: true
-    },
-    // user email
-    email: {
+    // // user last name
+    // last: {
+    //     type: String,
+    //     required: true
+    // },
+    // username
+    username: {
         type: String,
         required: true
     },
@@ -37,16 +37,16 @@ const UsersSchema = new Schema ({
 });
 
 UsersSchema.pre('save', function(next){
-    var Users = this;
+    var user = this;
 
-    if (!Users.isModified('password')) return next();
+    if (!user.isModified('password')) return next();
 
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next (err);
 
-    bcrypt.hash(Users.password, salt, function(err, hash){
+    bcrypt.hash(user.password, salt, function(err, hash){
 
-        Users.password = hash;
+        user.password = hash;
         next();
     });
     });
@@ -60,11 +60,9 @@ UsersSchema.methods.comparePassword = function(candidatePassword, cb) {
 }
 
 // no duplicate users
-UsersSchema.index({email: 1}, {unique: true});
+UsersSchema.index({username: 1}, {unique: true});
 
 // model for Users collection
 const Users = mongoose.model("Users", UsersSchema);
 
 module.exports = Users;
-
-

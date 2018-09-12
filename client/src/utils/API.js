@@ -31,5 +31,13 @@ export default {
     let URL = url + `?api_key=${APIKEY}&format=json`;
     return axios.get(
       URL);
+  },
+
+  findUser: function(username) {
+    return axios.get("/api/users/" + username);
+  },
+
+  saveUser: function(userData) {
+    return axios.post("/api/users/", userData);
   }
 };
