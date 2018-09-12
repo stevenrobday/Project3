@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require("express-session");
-const passport = require("./config/passport");
+const MongoStore = require('connect-mongo')(session)
+const passport = require("./passport");
 const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -16,11 +17,20 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(session({ secret: "bananers", resave: true, saveUninitialized: true }));
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gamesplice");
+
+app.use(session({ 
+  secret: "bananers", 
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  resave: true, 
+  saveUninitialized: true 
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Define API routes here
+app.use('/auth', require('./auth'));
 app.use(routes);
 // Send every other request to the React app
 // Define any API routes before this runs
@@ -28,9 +38,12 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
+<<<<<<< HEAD
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gamesplice");
 
+=======
+>>>>>>> e32c8ae0cba70120d0540de34f66206c3c5f62d1
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
