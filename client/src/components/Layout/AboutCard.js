@@ -4,7 +4,7 @@ import { Columns, Column, Section } from "../Layout";
 export const AboutCard = props => (
     <Section>
         <Columns>
-            <Column size="is-4" offset="is-offset-2">
+            <Column size="is-12">
                 <div className="container">
                     <div className="container has-background-white-ter">
                         <div className="columns">

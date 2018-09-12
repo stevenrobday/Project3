@@ -38,12 +38,9 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-<<<<<<< HEAD
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/gamesplice");
 
-=======
->>>>>>> e32c8ae0cba70120d0540de34f66206c3c5f62d1
 app.listen(PORT, () => {
   console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
