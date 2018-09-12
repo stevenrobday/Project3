@@ -1,5 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('./localStrategy')
+
 const users = require('../models/users')
 
 passport.serializeUser((users, done) => {
@@ -16,15 +17,16 @@ passport.deserializeUser((id, done) => {
 		'firstName lastName photos local.username',
 		(err, user) => {
 			console.log('======= DESERILAIZE USER CALLED ======')
-			console.log(users)
+
+			console.log(user)
 			console.log('--------------')
-			done(null, users)
+			done(null, user)
+
 		}
 	)
 })
 
 // ==== Register Strategies ====
 passport.use(LocalStrategy)
-
 
 module.exports = passport

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AboutCard } from "../../components/Layout";
+import { AboutCard, Navbar } from "../../components/Layout";
 import { GameResults } from "../../components/Results";
 import API from "../../utils/API";
 
@@ -14,6 +14,7 @@ class Home extends Component {
   };
 
   searchGames = (game) => {
+    console.log("asdfsfd");
     API.searchGames(game)
       .then(res => {
         let urls = res.data.results.map(result => {
@@ -72,6 +73,15 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Navbar
+          onChange={this.handleInputChange}
+          value={this.state.game}
+          onClick={this.handleFormSubmit}
+          loggedIn={this.props.loggedIn}
+          login={this.props.login}
+          logOut={this.props.logOut}
+          user={this.props.user}
+        />
         {this.state.games.length > 0 ? (
           <GameResults results={this.state.games} />
         ) : (

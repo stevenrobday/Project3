@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Navbar } from "./components/Layout";
-import { Login } from "./components/Forms";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
 
@@ -21,6 +19,8 @@ class App extends Component {
           loggedIn: true,
           user: response.data.user
         });
+
+        console.log(response.data.user);
       }
       else {
         this.setState({
@@ -50,21 +50,31 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+  logOut = () => {
+		console.log('logging out');
+		axios.post('/auth/logout').then(response => {
+			console.log(response.data);
+			if (response.status === 200) {
+				this.setState({
+					loggedIn: false,
+					user: null
+				})
+			}
+		});
+	};
+
   render() {
     return (
       <div>
-        <Navbar
-          onChange={this.handleInputChange}
-          value={this.state.game}
-          onClick={this.handleFormSubmit}
-        >
-          <Login 
-            login={this.login}
-          />
-        </Navbar>
         <Router>
           <div>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={() => <Home 
+                loggedIn={this.state.loggedIn}
+                login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
+              />} 
+            />
             <Route exact path="/home" component={Home} />
             <Route exact path="/signup" component={SignUp} />
           </div>
