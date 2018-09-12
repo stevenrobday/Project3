@@ -9,7 +9,7 @@ Technology used in this app includes:
   <li>MongoDB</li>
   <li>Mongoose</li>
   <li>Passport</li>
-
+<br>
 To start the app, run the following steps:
   <li>Clone the repo to your computer</li>
   <li>CD to the file</li>
