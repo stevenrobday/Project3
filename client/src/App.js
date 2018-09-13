@@ -82,7 +82,7 @@ class App extends Component {
                 user={this.state.user}
               />} 
             />
-            <Route exact path="/profile/:username" render={(props) => <Profile 
+            <Route path="/profile/:username" render={(props) => <Profile 
                 {...props}
                 loggedIn={this.state.loggedIn}
                 login={this.login}
@@ -91,7 +91,10 @@ class App extends Component {
               />} 
             />
             <Route exact path="/signup" render={() => <SignUp 
+                loggedIn={this.state.loggedIn}
                 login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
               />} 
             />
           </Switch>

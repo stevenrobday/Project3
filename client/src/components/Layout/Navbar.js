@@ -20,11 +20,11 @@ export const Navbar = props => (
       </div>
     </div>
     <div className="navbar-menu">
-      
-        {props.loggedIn ? (
-          <div className="navbar-end">
-            <div className="navbar-item">Welcome,</div>
-            <div className="dropdown is-hoverable column">
+
+      {props.loggedIn ? (
+        <div className="navbar-end">
+          <div className="navbar-item">Welcome,</div>
+          <div className="dropdown is-hoverable column">
             <div className="dropdown-trigger">
               <button className="button is-right" aria-haspopup="true" aria-controls="dropdown-menu4">
                 <span className="icon is-small">
@@ -39,46 +39,49 @@ export const Navbar = props => (
             <div className="dropdown-menu" id="dropdown-menu4" role="menu">
               <div className="dropdown-content">
                 <div className="dropdown-item">
-                  <LogOut 
+                  <a href={`/profile/${props.user.username}`}>Profile</a>
+                </div>
+                <div className="dropdown-item">
+                  <LogOut
                     logOut={props.logOut}
                   />
                 </div>
               </div>
             </div>
           </div>
-          </div>
-        ) : (
+        </div>
+      ) : (
           <div className="navbar-end">
-          <div className="dropdown is-hoverable column">
-            <div className="dropdown-trigger">
-              <button className="button is-right" aria-haspopup="true" aria-controls="dropdown-menu4">
-                <span className="icon is-small">
-                  <i className="fas fa-sign-in-alt" aria-hidden="true"></i>
-                </span>
-                <span>Login</span>
-                <span className="icon is-small">
-                  <i className="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            <div className="dropdown-menu" id="dropdown-menu4" role="menu">
-              <div className="dropdown-content">
-                <div className="dropdown-item">
-                  <Login
-                    login={props.login}
-                  />
+            <div className="dropdown is-hoverable column">
+              <div className="dropdown-trigger">
+                <button className="button is-right" aria-haspopup="true" aria-controls="dropdown-menu4">
+                  <span className="icon is-small">
+                    <i className="fas fa-sign-in-alt" aria-hidden="true"></i>
+                  </span>
+                  <span>Login</span>
+                  <span className="icon is-small">
+                    <i className="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div className="dropdown-menu" id="dropdown-menu4" role="menu">
+                <div className="dropdown-content">
+                  <div className="dropdown-item">
+                    <Login
+                      login={props.login}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="navbar-item">or</div>
-          <a className="navbar-item has-text-white has-addons" href="/signup">
-            {/* <span className="icon is-small">
+            <div className="navbar-item">or</div>
+            <a className="navbar-item has-text-white has-addons" href="/signup">
+              {/* <span className="icon is-small">
                 <i className="fas fa-user-plus" aria-hidden="true"></i>
               </span> */}
-            Sign Up
+              Sign Up
         </a>
-        </div>
+          </div>
         )}
     </div>
   </nav>

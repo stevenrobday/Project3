@@ -8,7 +8,7 @@ export class AddGame extends Component {
     owned: false
   }
 
-  componentDidMount() {
+  componentWillMount() {
     API.getUser(this.props.user._id)
       .then(response => {
         if (response.data.wishlist.findIndex(x => x.giantbombid === `${this.props.gameObj.giantbombid}`) !== -1) {
@@ -28,7 +28,9 @@ export class AddGame extends Component {
     event.preventDefault();
     API.returnGame(this.props.gameObj.giantbombid)
       .then(response => {
-        API.deleteOwned(this.props.user._id, response.data[0]._id);
+        if (response.data.length) {
+          API.deleteOwned(this.props.user._id, response.data[0]._id);
+        }
         API.wishlist(this.props.user._id, this.props.gameObj);
         this.setState({
           wishlist: true,
@@ -41,7 +43,9 @@ export class AddGame extends Component {
     event.preventDefault();
     API.returnGame(this.props.gameObj.giantbombid)
       .then(response => {
-        API.deleteWishlist(this.props.user._id, response.data[0]._id);
+        if (response.data.length) {
+          API.deleteWishlist(this.props.user._id, response.data[0]._id);
+        }
         API.owned(this.props.user._id, this.props.gameObj);
         this.setState({
           wishlist: false,

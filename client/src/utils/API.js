@@ -48,5 +48,9 @@ export default {
 
   returnGame: function(id) {
     return axios.get(`/api/games/${id}`);
+  },
+
+  findOneUser: function(username) {
+    return axios.get("/api/users/findone/" + username);
   }
 };

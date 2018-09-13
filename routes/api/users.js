@@ -11,6 +11,10 @@ router
   .get(usersController.find);
 
 router
+  .route("/findone/:id")
+  .get(usersController.findOne);
+
+router
   .route("/user/:id")
   .get(usersController.getUser);
 
