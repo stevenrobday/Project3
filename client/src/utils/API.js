@@ -1,8 +1,6 @@
 import axios from "axios";
 require('dotenv').config();
 
-axios.defaults.withCredentials = true;
-
 const BASEURL = "https://www.giantbomb.com/api/";
 
 const APIKEY = "16e66d86cfe6e8dfc2acdd1e7920db35544292d5";
