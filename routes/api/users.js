@@ -10,4 +10,16 @@ router
   .route("/:id")
   .get(usersController.find);
 
+router
+  .route("/user/:id")
+  .get(usersController.getUser);
+
+router
+  .route("/wishlist/:userid/:gameid")
+  .delete(usersController.deleteWishlist);
+
+router
+  .route("/owned/:userid/:gameid")
+  .delete(usersController.deleteOwned);
+
 module.exports = router;

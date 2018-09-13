@@ -26,7 +26,7 @@ export class SignUpForm extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState(prevState => ({
-      [name]: {...prevState[name], input: value}
+      [name]: { ...prevState[name], input: value }
     }), () => {
       this.validateInput(name, value);
     });
@@ -60,7 +60,7 @@ export class SignUpForm extends Component {
         }
         break;
       case "password":
-        if (value.length > 5) {      
+        if (value.length > 5) {
           this.setState(prevState => ({
             [name]: { ...prevState[name], valid: true }
           }));
@@ -80,83 +80,86 @@ export class SignUpForm extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.name.valid && this.state.username.valid && this.state.password.valid) {
-      API.findUser(this.state.username.input )
-      .then(res => {
-        if (res.data.length) {
-          this.setState(prevState => ({
-            username: { ...prevState.username, valid: false, text: "Someone else took that username already :( :( :(" }
-          }));
-        }
-        else {
-          API.saveUser({
-            name: this.state.name.input,
-            username: this.state.username.input,
-            password: this.state.password.input
-          })
-          .then(res => this.setState({ redirect: true }))
-        }
-      }) 
-      .catch(err => console.log(err));
+      API.findUser(this.state.username.input)
+        .then(res => {
+          if (res.data.length) {
+            this.setState(prevState => ({
+              username: { ...prevState.username, valid: false, text: "Someone else took that username already :( :( :(" }
+            }));
+          }
+          else {
+            API.saveUser({
+              name: this.state.name.input,
+              username: this.state.username.input,
+              password: this.state.password.input
+            })
+              .then(res => {
+                this.props.login(this.state.username.input, this.state.password.input);
+                this.setState({ redirect: true });
+              })
+          }
+        })
+        .catch(err => console.log(err));
     }
   }
 
   render() {
     return this.state.redirect ? (
-     <Redirect to="/home" />
+      <Redirect to="/home" />
     ) : (
-      <Section>
-        <Columns>
-          <Column size="is-4" offset="is-offset-4">
-            <Box>
-              <h1 className="title">Sign Up!</h1>
-              <form>
-                <div className="field">
-                  <Input
-                    onChange={this.handleInputChange}
-                    value={this.state.name.input}
-                    label="Name"
-                    icon="fas fa-user"
-                    name="name"
-                    placeholder="Full Name"
-                    type="text"
-                    valid={this.state.name.valid}
-                    invalidText={this.state.name.text}
-                  />
-                </div>
-                <div className="field">
-                  <Input
-                    onChange={this.handleInputChange}
-                    value={this.state.username.input}
-                    label="Username"
-                    icon="far fa-user"
-                    name="username"
-                    placeholder="Username"
-                    type="text"
-                    valid={this.state.username.valid}
-                    invalidText={this.state.username.text}
-                  />
-                </div>
-                <div className="field">
-                  <Input
-                    onChange={this.handleInputChange}
-                    value={this.state.password.input}
-                    label="Password"
-                    icon="fa fa-key"
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                    valid={this.state.password.valid}
-                    invalidText={this.state.password.text}
-                  />
-                </div>
-                <FormBtn color="is-success" onClick={this.handleFormSubmit}>
-                  SIGN UP
+        <Section>
+          <Columns>
+            <Column size="is-4" offset="is-offset-4">
+              <Box>
+                <h1 className="title">Sign Up!</h1>
+                <form>
+                  <div className="field">
+                    <Input
+                      onChange={this.handleInputChange}
+                      value={this.state.name.input}
+                      label="Name"
+                      icon="fas fa-user"
+                      name="name"
+                      placeholder="Full Name"
+                      type="text"
+                      valid={this.state.name.valid}
+                      invalidText={this.state.name.text}
+                    />
+                  </div>
+                  <div className="field">
+                    <Input
+                      onChange={this.handleInputChange}
+                      value={this.state.username.input}
+                      label="Username"
+                      icon="far fa-user"
+                      name="username"
+                      placeholder="Username"
+                      type="text"
+                      valid={this.state.username.valid}
+                      invalidText={this.state.username.text}
+                    />
+                  </div>
+                  <div className="field">
+                    <Input
+                      onChange={this.handleInputChange}
+                      value={this.state.password.input}
+                      label="Password"
+                      icon="fa fa-key"
+                      name="password"
+                      placeholder="Password"
+                      type="password"
+                      valid={this.state.password.valid}
+                      invalidText={this.state.password.text}
+                    />
+                  </div>
+                  <FormBtn color="is-success" onClick={this.handleFormSubmit}>
+                    SIGN UP
                 </FormBtn>
-              </form>
-            </Box>
-          </Column>
-        </Columns>
-      </Section>
-    );
+                </form>
+              </Box>
+            </Column>
+          </Columns>
+        </Section>
+      );
   }
 }

@@ -8,21 +8,31 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  find: function (req, res) {
+  returnGame: function (req, res) {
     db.Games
-      .find({ gamesID: req.params.id })
+      .find({ giantbombid: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  create: function (req, res) {
+  addWishlist: function (req, res) {
     db.Games
       .findOneAndUpdate(req.body, req.body, { new: true, upsert: true })
       .then(dbModel => {
-        return db.Users.findOneAndUpdate({ username: req.params.username }, { $push: { wishlist: dbModel._id } });
+        return db.Users.findOneAndUpdate({ _id: req.params.id }, { $push: { wishlist: dbModel._id } });
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  addOwned: function (req, res) {
+    db.Games
+      .findOneAndUpdate(req.body, req.body, { new: true, upsert: true })
+      .then(dbModel => {
+        return db.Users.findOneAndUpdate({ _id: req.params.id }, { $push: { owned: dbModel._id } });
+      })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  
   remove: function (req, res) {
     db.Games
       .findOne({ gamesID: req.params.id })

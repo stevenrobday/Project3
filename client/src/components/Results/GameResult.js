@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Columns, Column } from "../Layout";
-import { Wishlist } from "../Forms";
+import { AddGame } from "../Forms";
 import Accordion from "../Accordion";
 
 export class GameResult extends Component {
   render() {
     return (
       <div>
-        <Columns>
-          <Column size="is-2" offset="">
+        <Columns addClass="has-text-centered">
+          <Column size="is-2" offset="has-text-left">
             <img src={this.props.result.coverImage} alt={this.props.result.name} />
           </Column>
-          <Column size="is-8" offset="">
+          <Column size="is-8" offset="has-text-left">
             <div className="is-size-5">
               <strong>
                 {this.props.result.name}
@@ -40,11 +40,15 @@ export class GameResult extends Component {
               <a href={this.props.result.wiki} target="_blank">Visit wiki page!</a>
             </div>
           </Column>
-          <Column size="is-2" offset="">
+          <Column size="is-2" offset="has-text-centered">
             {this.props.loggedIn && (
-              <Wishlist 
+              <AddGame
                 user={this.props.user}
-                title={this.props.result.name}
+                gameObj={{
+                  title: this.props.result.name,
+                  coverimage: this.props.result.coverImage,
+                  giantbombid: this.props.result.gameID
+                }}
               />
             )}
           </Column>

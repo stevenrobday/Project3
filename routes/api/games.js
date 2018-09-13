@@ -5,10 +5,18 @@ const gamesController = require("../../controllers/gamesController");
 router.route("/")
     .get(gamesController.findAll);
 
+router
+    .route("/:id")
+    .get(gamesController.returnGame);
+
 // Matches with "/api/articles/:id"
 router
-  .route("/:username")
-  .post(gamesController.create);
+  .route("/wishlist/:id")
+  .post(gamesController.addWishlist);
+
+router
+  .route("/owned/:id")
+  .post(gamesController.addOwned);
   // .delete(gamesController.remove);
 
 module.exports = router;
