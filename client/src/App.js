@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import SignUp from "./pages/SignUp";
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
         console.log(response.data.user);
       }
       else {
+        console.log(":(");
         this.setState({
           loggedIn: false,
           user: null
@@ -46,8 +48,7 @@ class App extends Component {
             user: response.data.user
           });
         }
-      })
-      .catch(err => console.log(err));
+      });
   };
 
   logOut = () => {
@@ -65,9 +66,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Router>
-          <div>
+        <Router >
+          <Switch>
             <Route exact path="/" render={() => <Home 
                 loggedIn={this.state.loggedIn}
                 login={this.login}
@@ -75,11 +75,30 @@ class App extends Component {
                 user={this.state.user}
               />} 
             />
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/signup" component={SignUp} />
-          </div>
+            <Route exact path="/home" render={() => <Home 
+                loggedIn={this.state.loggedIn}
+                login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
+              />} 
+            />
+            <Route path="/profile/:username" render={(props) => <Profile 
+                {...props}
+                loggedIn={this.state.loggedIn}
+                login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
+              />} 
+            />
+            <Route exact path="/signup" render={() => <SignUp 
+                loggedIn={this.state.loggedIn}
+                login={this.login}
+                logOut={this.logOut}
+                user={this.state.user}
+              />} 
+            />
+          </Switch>
         </Router>
-      </div>
     );
   }
 }

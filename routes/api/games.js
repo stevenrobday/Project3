@@ -3,13 +3,20 @@ const gamesController = require("../../controllers/gamesController");
 
 // Matches with "/api/articles"
 router.route("/")
-    .get(gamesController.findAll)
-    .post(gamesController.create);
+    .get(gamesController.findAll);
+
+router
+    .route("/:id")
+    .get(gamesController.returnGame);
 
 // Matches with "/api/articles/:id"
 router
-  .route("/:id")
-  .get(gamesController.find)
-  .delete(gamesController.remove);
+  .route("/wishlist/:id")
+  .post(gamesController.addWishlist);
+
+router
+  .route("/owned/:id")
+  .post(gamesController.addOwned);
+  // .delete(gamesController.remove);
 
 module.exports = router;

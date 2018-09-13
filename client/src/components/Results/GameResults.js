@@ -14,6 +14,8 @@ export const GameResults = props => (
               <Box>
                 <GameResult
                   result={result}
+                  loggedIn={props.loggedIn}
+                  user={props.user}
                 />
               </Box>
             </Column>

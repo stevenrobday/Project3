@@ -1,26 +1,11 @@
 import axios from "axios";
 require('dotenv').config();
 
-// let BASEURL = "https://api-endpoint.igdb.com/games/";
-
-// const APIKEY = process.env.REACT_APP_IGDB_KEY;
-
 const BASEURL = "https://www.giantbomb.com/api/";
 
 const APIKEY = process.env.REACT_APP_GIANTBOMB_KEY;
 
 export default {
-  // searchGames: function (game) {
-  //   BASEURL += `?search=${game}&fields=*`;
-  //   return axios.get(
-  //     BASEURL,
-  //     {
-  //       headers: {
-  //         "user-key": APIKEY,
-  //         Accept: "application/json"
-  //       }
-  //     });
-  // }
   searchGames: function (game) {
     let URL = BASEURL + `search/?api_key=${APIKEY}&format=json&query="${game}"&resources=game`;
     return axios.get(
@@ -39,5 +24,33 @@ export default {
 
   saveUser: function(userData) {
     return axios.post("/api/users/", userData);
+  },
+
+  wishlist: function(id, game) {
+    return axios.post("/api/games/wishlist/" + id, game);
+  },
+
+  owned: function(id, game) {
+    return axios.post("/api/games/owned/" + id, game);
+  },
+
+  getUser: function(id) {
+    return axios.get("/api/users/user/" + id);
+  },
+
+  deleteWishlist: function(userid, gameid) {
+    return axios.delete(`/api/users/wishlist/${userid}/${gameid}`);
+  },
+
+  deleteOwned: function(userid, gameid) {
+    return axios.delete(`/api/users/owned/${userid}/${gameid}`);
+  },
+
+  returnGame: function(id) {
+    return axios.get(`/api/games/${id}`);
+  },
+
+  findOneUser: function(username) {
+    return axios.get("/api/users/findone/" + username);
   }
 };

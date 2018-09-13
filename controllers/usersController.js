@@ -18,7 +18,16 @@ module.exports = {
   // },
   find: function (req, res) {
     db.Users
-      .find({ username: req.params.id})
+      .find({ username: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  findOne: function (req, res) {
+    db.Users
+      .findOne({ username: req.params.id })
+      .populate("wishlist")
+      .populate("owned")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -26,6 +35,29 @@ module.exports = {
   create: function (req, res) {
     db.Users
       .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  getUser: function (req, res) {
+    db.Users
+      .findOne({ _id: req.params.id })
+      .populate("wishlist")
+      .populate("owned")
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  deleteWishlist: function (req, res) {
+    db.Users
+      .findByIdAndUpdate({ _id: req.params.userid }, { $pullAll: { wishlist: [req.params.gameid] } })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  deleteOwned: function (req, res) {
+    db.Users
+      .findByIdAndUpdate({ _id: req.params.userid }, { $pullAll: { owned: [req.params.gameid] } })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   }

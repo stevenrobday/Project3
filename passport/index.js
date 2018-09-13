@@ -13,7 +13,7 @@ passport.deserializeUser((id, done) => {
 	console.log('DEserialize ... called');
 	User.findOne(
 		{ _id: id },
-		'name',
+		'name username',
 		(err, user) => {
 			console.log('======= DESERILAIZE USER CALLED ======');
 			console.log(user);
