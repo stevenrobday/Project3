@@ -1,6 +1,7 @@
 {
   "name": "mern",
   "version": "1.0.0",
+  "homepage": "https://gamesplice.herokuapp.com/",
   "description": "Mern Demo",
   "main": "server.js",
   "scripts": {
