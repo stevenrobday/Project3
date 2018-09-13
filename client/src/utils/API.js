@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const BASEURL = "https://www.giantbomb.com/api/";
 
-const APIKEY = process.env.REACT_APP_GIANTBOMB_KEY;
+const APIKEY = "16e66d86cfe6e8dfc2acdd1e7920db35544292d5";
 
 export default {
   searchGames: function (game) {
